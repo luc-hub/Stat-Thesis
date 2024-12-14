@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botnet Analysis Simulation</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .chart-container {
+            margin: 40px 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 25px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2.4rem;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #34495e;
+            padding-bottom: 10px;
+        }
+        .step {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Network Analysis Simulation for Botnet Detection</h1>
+    <p>This simulation demonstrates how to use statistical and visualization tools to analyze network traffic, comparing a normal scenario with a botnet attack scenario. Tools used include descriptive statistics, statistical tests, regression models, and time series analysis.</p>
+
+    <h2>1. Descriptive Statistics of the Network</h2>
+    <p><strong>Theoretical Approach:</strong> Descriptive statistics help summarize network data, identifying patterns and anomalies. During a botnet attack, malicious nodes show an abnormal number of connections and a significant increase in traffic.</p>
+    <div class="step">
+    <p><strong>Example:</strong> The following bar chart shows the connections per node in normal and attack scenarios.</p>
+
+    <div class="chart-container">
+        <canvas id="connectionsComparison"></canvas>
+    </div>
+
+    <script>
+        const ctx1 = document.getElementById('connectionsComparison').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['A', 'B', 'C', 'D', 'E'],
+                datasets: [
+                    {
+                        label: 'Normal Connections',
+                        data: [30, 40, 10, 60, 90],
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)'
+                    },
+                    {
+                        label: 'Attack Connections',
+                        data: [50, 70, 100, 90, 150],
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)'
+                    }
+                ]
+            },
+            options: { 
+                responsive: true, 
+                plugins: { 
+                    title: { display: true, text: 'Connections per Node' } 
+                } 
+            }
+        });
+    </script>
+    </div>
+
+    <h2>2. Kolmogorov-Smirnov Test</h2>
+    <p><strong>Theoretical Approach:</strong> This test compares the empirical distribution of network data with a theoretical distribution, such as the normal distribution. During an attack, the response time distribution tends to deviate from normality.</p>
+    <div class="step">
+    <p><strong>Example:</strong> The following line charts show the cumulative distributions of response times in normal and attack scenarios.</p>
+
+    <div class="chart-container">
+        <canvas id="ksTest"></canvas>
+    </div>
+
+    <script>
+        const ctx2 = document.getElementById('ksTest').getContext('2d');
+        new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: ['0%', '25%', '50%', '75%', '100%'],
+                datasets: [
+                    {
+                        label: 'Normal Distribution',
+                        data: [10, 15, 25, 30, 50],
+                        borderColor: 'blue',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Attack Distribution',
+                        data: [50, 70, 90, 100, 150],
+                        borderColor: 'red',
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: { 
+                responsive: true, 
+                plugins: { 
+                    title: { display: true, text: 'Kolmogorov-Smirnov Test' } 
+                } 
+            }
+        });
+    </script>
+    </div>
+
+    <h2>3. Regression Models</h2>
+    <p><strong>Theoretical Approach:</strong> Linear regression predicts traffic volume ("y") based on the number of connections ("x"). During an attack, the slope ("m") increases, indicating abnormal traffic growth.</p>
+    <div class="step">
+    <p><strong>Example:</strong> Traffic data is modeled with linear regression equations for normal and attack scenarios.</p>
+
+    <div class="chart-container">
+        <canvas id="regression"></canvas>
+    </div>
+
+    <script>
+        const ctx3 = document.getElementById('regression').getContext('2d');
+        new Chart(ctx3, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        label: 'Normal Scenario',
+                        data: [{x: 10, y: 5}, {x: 30, y: 15}, {x: 50, y: 25}],
+                        borderColor: 'green',
+                        showLine: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Attack Scenario',
+                        data: [{x: 10, y: 12}, {x: 30, y: 36}, {x: 50, y: 60}],
+                        borderColor: 'red',
+                        showLine: true,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: { 
+                responsive: true, 
+                plugins: { 
+                    title: { display: true, text: 'Linear Regression' } 
+                } 
+            }
+        });
+    </script>
+    </div>
+
+    <h2>4. Time Series Analysis</h2>
+    <p><strong>Theoretical Approach:</strong> Time series analysis examines dynamics over time, such as traffic spikes during a DDoS attack. Tools like moving averages and seasonal decomposition help identify anomalies.</p>
+    <div class="step">
+    <p><strong>Example:</strong> The following line chart shows HTTP requests per hour in normal and attack scenarios.</p>
+
+    <div class="chart-container">
+        <canvas id="timeSeries"></canvas>
+    </div>
+
+    <script>
+        const ctx4 = document.getElementById('timeSeries').getContext('2d');
+        new Chart(ctx4, {
+            type: 'line',
+            data: {
+                labels: ['Hour 1', 'Hour 2', 'Hour 3', 'Hour 4', 'Hour 5', 'Hour 6'],
+                datasets: [
+                    {
+                        label: 'Normal Scenario',
+                        data: [50, 55, 60, 65, 70, 75],
+                        borderColor: 'blue',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Attack Scenario',
+                        data: [50, 200, 300, 100, 70, 75],
+                        borderColor: 'red',
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: { 
+                responsive: true, 
+                plugins: { 
+                    title: { display: true, text: 'Time Series Analysis' } 
+                } 
+            }
+        });
+    </script>
+    </div>
+    </div>
+</body>
+</html>
